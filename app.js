@@ -1,36 +1,29 @@
 var express = require('express'); 
 var http = require('http'); 
 var app = express(); 
-const bodyParser = require('body-parser')
+const fetch = require('node-fetch');
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.set('views', './')
+app.set('view engine', 'pug');
 
-function displayCurrentUrl(req) {
-  console.log(req.protocol + '://' + req.get('host') + req.originalUrl)
-}
+let cardsImages
+fetch("https://deckofcardsapi.com/api/deck/26zswqwpxrrg/draw/?count=52")
+  .then(response => response.json())
+  .then(response => {
+    cardsImages = response.cards.map(el => {
+      return el.images.png
+    })
+    fetch("https://deckofcardsapi.com/api/deck/26zswqwpxrrg/shuffle")
+  } )
+  .catch(error => console.log("Erreur : " + error));
+
+
+
 
 app.get('/', function(req, res){   
-  res.writeHead(200);   
-  displayCurrentUrl(req)
-  res.write('Hello Express!!!');   
+  res.render('index', { title: 'Cards', cards: cardsImages});
   res.end(); 
 }); 
 
-app.get('/salut', function(req, res){   
-  res.writeHead(200);   
-  displayCurrentUrl(req)
-  res.write('salutt');    
-  res.end(); 
-}); 
-
-app.get('/post', function (req, res) {
-  res.sendFile(__dirname + '/index.html')
-})
-
-app.post('/post', function (req, res) {
-  console.log('ca ne fonctionne pas', req.body)
-  res.send('le super post')
-})
 
 http.createServer(app).listen(4567);
