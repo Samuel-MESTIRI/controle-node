@@ -1,0 +1,23 @@
+{
+  "name": "controle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samuel-MESTIRI/controle-node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Samuel-MESTIRI/controle-node/issues"
+  },
+  "homepage": "https://github.com/Samuel-MESTIRI/controle-node#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

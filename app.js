@@ -1,7 +1,17 @@
+var express = require('express'); 
 var http = require('http'); 
-http.createServer(function (request, response) {   
-  response.writeHead(200);   
-  response.write('<h1>Je retourne la chaine de on choix !</h1>\n');   
-  response.end(); 
-}).listen(5000); 
-console.log('Server running at ​http://localhost:5000​'); 
+var app = express(); 
+
+app.get('/', function(req, res){   
+  res.writeHead(200);   
+  res.write('Hello Express!!!');   
+  res.end(); 
+}); 
+
+app.get('/salut', function(req, res){   
+  res.writeHead(200);   
+  res.write('salutt');   
+  res.end(); 
+}); 
+
+http.createServer(app).listen(4567);
